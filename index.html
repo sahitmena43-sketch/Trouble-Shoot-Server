@@ -1,1 +1,514 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Trouble Shooters | Discord Server</title>
+    <!-- Font Awesome 6 (Free Icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts: Poppins + Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            background: linear-gradient(145deg, #0a0c10 0%, #11151c 100%);
+            font-family: 'Inter', sans-serif;
+            color: #eef2ff;
+            line-height: 1.5;
+        }
+
+        /* custom scroll */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1e2432;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #5865f2;
+            border-radius: 10px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        /* header / hero */
+        .hero {
+            background: rgba(15, 20, 30, 0.7);
+            backdrop-filter: blur(8px);
+            border-radius: 2.5rem;
+            padding: 2rem 2rem;
+            margin-bottom: 2.5rem;
+            border: 1px solid rgba(88, 101, 242, 0.3);
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.5);
+            text-align: center;
+        }
+        .hero h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffffff, #b9c3ff, #5865f2);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #23272e;
+            padding: 0.5rem 1.2rem;
+            border-radius: 60px;
+            margin-top: 1rem;
+            font-weight: 500;
+        }
+        .hero-badge i {
+            color: #5865f2;
+            font-size: 1.3rem;
+        }
+        .stats-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.8rem;
+            margin: 2rem 0 0.5rem;
+        }
+        .stat-card {
+            background: #1e1f2c;
+            border-radius: 2rem;
+            padding: 0.9rem 1.8rem;
+            text-align: center;
+            min-width: 130px;
+            border-bottom: 3px solid #5865f2;
+        }
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            font-family: 'Poppins', sans-serif;
+            color: #dee2ff;
+        }
+        .stat-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #a0a5b5;
+        }
+
+        /* section titles */
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 2rem 0 1.2rem 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-left: 5px solid #5865f2;
+            padding-left: 20px;
+        }
+        .section-title i {
+            color: #5865f2;
+            font-size: 1.6rem;
+        }
+
+        /* channel grid */
+        .channel-category {
+            background: #0f1119;
+            border-radius: 1.5rem;
+            margin-bottom: 2rem;
+            overflow: hidden;
+            border: 1px solid #282e3c;
+            transition: 0.2s;
+        }
+        .category-header {
+            background: #1a1e2a;
+            padding: 1rem 1.8rem;
+            font-weight: 700;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-left: 4px solid #5865f2;
+        }
+        .category-header i {
+            font-size: 1.3rem;
+            color: #b5c0ff;
+        }
+        .channels-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            padding: 1.2rem 1.5rem;
+        }
+        .channel-tag {
+            background: #232736;
+            border-radius: 40px;
+            padding: 0.4rem 1rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.1s;
+            border: 1px solid #2f3545;
+        }
+        .channel-tag i {
+            font-size: 0.8rem;
+            color: #a5b0e0;
+        }
+        .channel-tag:hover {
+            background: #2d3347;
+            transform: translateY(-2px);
+        }
+
+        /* roles section */
+        .roles-wrapper {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+            gap: 1rem;
+            background: #0e1019;
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            border: 1px solid #262d3a;
+        }
+        .role-card {
+            background: #151b26;
+            border-radius: 1.2rem;
+            padding: 0.7rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.2s;
+            border-left: 4px solid;
+        }
+        .role-icon {
+            width: 32px;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+        .role-info {
+            flex: 1;
+        }
+        .role-name {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        .role-count {
+            font-size: 0.7rem;
+            color: #8f96aa;
+        }
+        .role-bot {
+            background: #2c2f42;
+            border-radius: 20px;
+            padding: 2px 8px;
+            font-size: 0.65rem;
+            font-weight: 600;
+            margin-left: 6px;
+        }
+
+        /* footer & join btn */
+        .join-area {
+            text-align: center;
+            margin: 3rem 0 2rem;
+        }
+        .join-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: #5865f2;
+            padding: 1rem 2.5rem;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: white;
+            text-decoration: none;
+            transition: 0.2s;
+            box-shadow: 0 8px 20px rgba(88,101,242,0.3);
+        }
+        .join-btn:hover {
+            background: #4752c4;
+            transform: scale(1.02);
+            box-shadow: 0 12px 25px rgba(88,101,242,0.5);
+        }
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            font-size: 0.75rem;
+            color: #6e748b;
+            border-top: 1px solid #202433;
+            margin-top: 2rem;
+        }
+        @media (max-width: 700px) {
+            .container { padding: 1rem; }
+            .hero h1 { font-size: 2rem; }
+            .stat-card { padding: 0.5rem 1rem; min-width: 100px; }
+            .section-title { font-size: 1.4rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- Hero Section -->
+    <div class="hero">
+        <h1><i class="fab fa-discord"></i> Trouble Shooters</h1>
+        <div class="hero-badge">
+            <i class="fas fa-shield-alt"></i> <span>Community · Problem Solvers · Gamers</span>
+        </div>
+        <div class="stats-grid">
+            <div class="stat-card"><div class="stat-number">18</div><div class="stat-label">Members</div></div>
+            <div class="stat-card"><div class="stat-number">33</div><div class="stat-label">Channels</div></div>
+            <div class="stat-card"><div class="stat-number">29</div><div class="stat-label">Roles</div></div>
+            <div class="stat-card"><div class="stat-number">12+</div><div class="stat-label">Bots</div></div>
+        </div>
+        <p style="margin-top: 1rem; max-width: 600px; margin-inline: auto; opacity: 0.8;">⚡ Aktive çdo ditë | Evente | Leveling | Gaming & Media</p>
+    </div>
+
+    <!-- CHANNELS SECTION (based on image structure) -->
+    <div class="section-title"><i class="fas fa-hashtag"></i> Kanalet e Serverit</div>
+    
+    <!-- Welcome Area -->
+    <div class="channel-category">
+        <div class="category-header"><i class="fas fa-door-open"></i> Welcome Area</div>
+        <div class="channels-list">
+            <span class="channel-tag"><i class="fas fa-hashtag"></i> #WELCOME</span>
+            <span class="channel-tag"><i class="fas fa-sign-out-alt"></i> #GOODBYE</span>
+        </div>
+    </div>
+
+    <!-- Announcements -->
+    <div class="channel-category">
+        <div class="category-header"><i class="fas fa-bullhorn"></i> Announcements</div>
+        <div class="channels-list">
+            <span class="channel-tag"><i class="fas fa-gavel"></i> #RULES</span>
+            <span class="channel-tag"><i class="fas fa-newspaper"></i> #NJOFTIME</span>
+            <span class="channel-tag"><i class="fas fa-newspaper"></i> #NJOFTIME-2</span>
+            <span class="channel-tag"><i class="fas fa-search"></i> #Search</span>
+        </div>
+    </div>
+
+    <!-- FTESAT -->
+    <div class="channel-category">
+        <div class="category-header"><i class="fas fa-chalkboard-user"></i> FTESAT</div>
+        <div class="channels-list"><span class="channel-tag"><i class="fas fa-hashtag"></i> #FTESAT</span></div>
+    </div>
+
+    <!-- Role Pick -->
+    <div class="channel-category">
+        <div class="category-header"><i class="fas fa-tags"></i> Role Pick</div>
+        <div class="channels-list"><span class="channel-tag"><i class="fas fa-robot"></i> #ROLES-PICK</span></div>
+    </div>
+
+    <!-- Server Shop -->
+    <div class="channel-category">
+        <div class="category-header"><i class="fas fa-store"></i> Server Shop</div>
+        <div class="channels-list"><span class="channel-tag"><i class="fas fa-coins"></i> #SERVER-SHOP</span></div>
+    </div>
+
+    <!-- Active of the Day -->
+    <div class="channel-category">
+        <div class="category-header"><i class="fas fa-fire"></i> Active of the Day</div>
+        <div class="channels-list"><span class="channel-tag"><i class="fas fa-chart-line"></i> #ACTIVE-OF-THE-DAY</span></div>
+    </div>
+
+    <!-- Level -->
+    <div class="channel-category">
+        <div class="category-header"><i class="fas fa-chart-simple"></i> Level</div>
+        <div class="channels-list"><span class="channel-tag"><i class="fas fa-trophy"></i> #LEVEL</span></div>
+    </div>
+
+    <!-- Event Section -->
+    <div class="channel-category">
+        <div class="category-header"><i class="fas fa-calendar-star"></i> Event System</div>
+        <div class="channels-list">
+            <span class="channel-tag"><i class="fas fa-comments"></i> #EVENT-CHAT</span>
+            <span class="channel-tag"><i class="fas fa-gift"></i> #EVENT-PRIZES</span>
+            <span class="channel-tag"><i class="fas fa-clipboard-list"></i> #EVENT-RULES</span>
+            <span class="channel-tag"><i class="fas fa-chart-bar"></i> #EVENT-RESULTS</span>
+        </div>
+    </div>
+
+    <!-- Main Chat -->
+    <div class="channel-category">
+        <div class="category-header"><i class="fas fa-comments"></i> Main Chat</div>
+        <div class="channels-list">
+            <span class="channel-tag"><i class="fas fa-comment-dots"></i> #CHAT-GENERAL</span>
+            <span class="channel-tag"><i class="fas fa-gamepad"></i> #CHAT-GAMING-CHAT</span>
+            <span class="channel-tag"><i class="fas fa-image"></i> #CHAT-MEDIA</span>
+            <span class="channel-tag"><i class="fas fa-camera"></i> #CHAT-SCREENSHOTS</span>
+            <span class="channel-tag"><i class="fas fa-face-smile"></i> #CHAT-MEME</span>
+            <span class="channel-tag"><i class="fas fa-robot"></i> #CHAT-BOTS</span>
+            <span class="channel-tag"><i class="fas fa-bomb"></i> #CHAT-SPAM</span>
+            <span class="channel-tag"><i class="fas fa-square-poll-vertical"></i> #CHAT-POLL</span>
+        </div>
+    </div>
+
+    <!-- Staff Division -->
+    <div class="channel-category">
+        <div class="category-header"><i class="fas fa-user-shield"></i> Staff Division</div>
+        <div class="channels-list">
+            <span class="channel-tag"><i class="fas fa-lock"></i> #STAFF-CHAT</span>
+            <span class="channel-tag"><i class="fas fa-photo-film"></i> #STAFF-MEDIA</span>
+            <span class="channel-tag"><i class="fas fa-microchip"></i> #STAFF-BOTS</span>
+            <span class="channel-tag"><i class="fas fa-trash"></i> #STAFF-SPAM</span>
+            <span class="channel-tag"><i class="fas fa-ticket"></i> #STAFF-TICKETS</span>
+        </div>
+    </div>
+
+    <!-- VC1 Voice channels -->
+    <div class="channel-category">
+        <div class="category-header"><i class="fas fa-headphones"></i> Voice Channels (VC1)</div>
+        <div class="channels-list">
+            <span class="channel-tag"><i class="fas fa-microphone-alt"></i> 🎤 lounge-1</span>
+            <span class="channel-tag"><i class="fas fa-microphone-alt"></i> 🎧 lounge-2</span>
+        </div>
+    </div>
+
+    <!-- New / Sahit Mena special -->
+    <div class="channel-category">
+        <div class="category-header"><i class="fas fa-star-of-life"></i> New</div>
+        <div class="channels-list"><span class="channel-tag"><i class="fas fa-crown"></i> #SAHIT MENA</span></div>
+    </div>
+
+    <!-- ROLES SECTION (based on screenshot) -->
+    <div class="section-title"><i class="fas fa-id-card"></i> Rolet & Hierarki <span style="font-size:0.9rem;">(28 role unike)</span></div>
+    <div class="roles-wrapper" id="rolesContainer">
+        <!-- dynamic roles will be injected but also static fallback matching the image -->
+    </div>
+
+    <!-- BOTS & INTEGRATIONS highlight -->
+    <div class="section-title"><i class="fas fa-microchip"></i> Bots Aktive</div>
+    <div class="channel-category" style="background:#0a0d17;">
+        <div class="channels-list" style="justify-content:center;">
+            <span class="channel-tag"><i class="fab fa-discord"></i> ProBot</span>
+            <span class="channel-tag"><i class="fab fa-discord"></i> Carl-bot</span>
+            <span class="channel-tag"><i class="fab fa-discord"></i> Dyno</span>
+            <span class="channel-tag"><i class="fab fa-discord"></i> UnbelievaBot</span>
+            <span class="channel-tag"><i class="fab fa-discord"></i> Arcane</span>
+            <span class="channel-tag"><i class="fab fa-discord"></i> Ticket Tool</span>
+            <span class="channel-tag"><i class="fab fa-discord"></i> GiveawayBot</span>
+            <span class="channel-tag"><i class="fab fa-discord"></i> InviteLogger</span>
+            <span class="channel-tag"><i class="fab fa-discord"></i> Koya</span>
+            <span class="channel-tag"><i class="fab fa-discord"></i> Member Count</span>
+            <span class="channel-tag"><i class="fas fa-robot"></i> Trouble Shot Bot</span>
+            <span class="channel-tag"><i class="fas fa-users"></i> Auto Role Bot</span>
+        </div>
+        <div style="padding: 0.5rem 1.5rem 1rem; font-size:0.8rem; color:#a8b3cf;"><i class="fas fa-info-circle"></i> Gjithsej 12+ bota ndihmojnë për moderim, level, giveaways & muzikë</div>
+    </div>
+
+    <!-- Join CTA -->
+    <div class="join-area">
+        <a href="#" class="join-btn" id="discordInviteBtn">
+            <i class="fab fa-discord fa-lg"></i> Bashkohu me Trouble Shooters
+        </a>
+        <p style="margin-top: 1rem; font-size: 0.8rem;">🔗 ftesë aktive | Komunitet miqësor | Evente speciale</p>
+    </div>
+    <footer>
+        <i class="fas fa-code"></i> Trouble Shooters — Server Discord zyrtar | 18 anëtarë · 33 kanale · 29 role <br>
+        © 2025 Community
+    </footer>
+</div>
+
+<script>
+    // Roles data extracted exactly from the second image (Roles - 28)
+    const rolesList = [
+        { name: "OWNER", members: 2, isBot: false, color: "#e67e22" },
+        { name: "ADMINISTRATOR", members: 2, isBot: false, color: "#e74c3c" },
+        { name: "MODERATOR", members: 1, isBot: false, color: "#3498db" },
+        { name: "SUPPORT", members: 1, isBot: false, color: "#2ecc71" },
+        { name: "MYTHIC", members: 1, isBot: false, color: "#9b59b6" },
+        { name: "VIP", members: 1, isBot: false, color: "#f1c40f" },
+        { name: "LEGEND", members: 1, isBot: false, color: "#e67e22" },
+        { name: "ACTIVE", members: 1, isBot: false, color: "#1abc9c" },
+        { name: "ANNOUNCEMENTS", members: 13, isBot: false, color: "#95a5a6" },
+        { name: "GIVEAWAYS", members: 1, isBot: false, color: "#e056fd" },
+        { name: "GAMER", members: 1, isBot: false, color: "#2ecc71" },
+        { name: "STREAMER", members: 1, isBot: false, color: "#8e44ad" },
+        { name: "YOUTUBER", members: 1, isBot: false, color: "#ff3838" },
+        { name: "Auto Role Bot", members: 1, isBot: true, color: "#6c5ce7" },
+        { name: "MEMBER", members: 5, isBot: false, color: "#bdc3c7" },
+        { name: "GiveawayBot", members: 1, isBot: true, color: "#a29bfe" },
+        { name: "Koya", members: 1, isBot: true, color: "#fd79a8" },
+        { name: "Member Count", members: 1, isBot: true, color: "#0984e3" },
+        { name: "UnbelievaBot", members: 1, isBot: true, color: "#74b9ff" },
+        { name: "Arcane", members: 1, isBot: true, color: "#636e72" },
+        { name: "InviteLogger", members: 1, isBot: true, color: "#d63031" },
+        { name: "Ticket Tool", members: 1, isBot: true, color: "#00b894" },
+        { name: "ProBot", members: 1, isBot: true, color: "#fdcb6e" },
+        { name: "carl-bot", members: 1, isBot: true, color: "#6c5ce7" },
+        { name: "Dyno", members: 1, isBot: true, color: "#a363d9" },
+        { name: ".", members: 1, isBot: false, color: "#7f8c8d" },
+        { name: "Trouble Shot Bot", members: 1, isBot: true, color: "#e17055" },
+        { name: "BOTS", members: 12, isBot: false, color: "#2d3436" }
+    ];
+
+    const rolesContainer = document.getElementById('rolesContainer');
+    if (rolesContainer) {
+        rolesList.forEach(role => {
+            const roleCard = document.createElement('div');
+            roleCard.className = 'role-card';
+            roleCard.style.borderLeftColor = role.color;
+            // icon based on type
+            let iconHtml = role.isBot ? '<i class="fas fa-robot"></i>' : '<i class="fas fa-user-check"></i>';
+            if (role.name === 'OWNER') iconHtml = '<i class="fas fa-crown"></i>';
+            if (role.name === 'ADMINISTRATOR') iconHtml = '<i class="fas fa-shield-haltered"></i>';
+            if (role.name === 'MODERATOR') iconHtml = '<i class="fas fa-hammer"></i>';
+            if (role.name === 'VIP') iconHtml = '<i class="fas fa-gem"></i>';
+            if (role.name === 'BOTS') iconHtml = '<i class="fas fa-microchip"></i>';
+            roleCard.innerHTML = `
+                <div class="role-icon">${iconHtml}</div>
+                <div class="role-info">
+                    <div class="role-name">${role.name} ${role.isBot ? '<span class="role-bot">BOT</span>' : ''}</div>
+                    <div class="role-count">👥 ${role.members} anëtar${role.members !== 1 ? 'ë' : ''}</div>
+                </div>
+            `;
+            rolesContainer.appendChild(roleCard);
+        });
+        // add extra note (total roles count from image)
+        const totalRolesDisplay = document.createElement('div');
+        totalRolesDisplay.style.gridColumn = '1/-1';
+        totalRolesDisplay.style.textAlign = 'center';
+        totalRolesDisplay.style.marginTop = '0.8rem';
+        totalRolesDisplay.style.fontSize = '0.75rem';
+        totalRolesDisplay.style.opacity = '0.7';
+        totalRolesDisplay.innerHTML = '<i class="fas fa-list-ul"></i> Gjithsej 28 role (duke përfshirë bot roles & @everyone)';
+        rolesContainer.appendChild(totalRolesDisplay);
+    }
+
+    // Optional: if you want a real invite link, admin can replace # with actual discord invite
+    const inviteBtn = document.getElementById('discordInviteBtn');
+    // Example placeholder (Trouble Shooters demo invite - you should replace with your own invite)
+    // For demonstration we link to discord invite generator, but user must set real one.
+    // We'll make it open generic discord invite page but with alert to set real invite.
+    inviteBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        // In a real scenario, replace 'YOUR_INVITE_CODE' with actual invite like "troubleshooters"
+        // For now we simulate an info message, but can also prefill.
+        const fakeInvite = 'https://discord.gg/troubleshooters-demo';
+        // Ideally the server owner pastes his invite. We'll open a dialog but to be professional:
+        // Since we don't have the real invite code we just show a message but provide a way
+        alert('🔗 Për t\'u bashkuar në serverin Trouble Shooters, ju lutemi përdorni ftesën zyrtare. Kontaktoni administratorin për ftesën e saktë.\n\n(Replace këtë link me ftesën e Discord-it në kodin HTML)');
+        window.open('https://discord.gg/', '_blank'); // neutral
+    });
+    
+    // Additional dynamic member count? We already show static 18 members from data. but we can add charm
+    // Also add total bots count
+    const botCount = rolesList.filter(r => r.isBot === true).length;
+    const botRoleElement = document.querySelector('.stat-card:last-child .stat-number');
+    if (botRoleElement) botRoleElement.innerText = botCount+'+';
+    
+    // channel count display
+    const totalChannelsFromList = 33; // from image
+    // everything matches :)
+    console.log(`Trouble Shooters website gati | Bots: ${botCount}`);
+</script>
+</body>
+  </html>
